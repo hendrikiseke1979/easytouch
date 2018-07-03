@@ -16,7 +16,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
     }
 
-    fun sendMessage(view: View) {
+    fun buttonClickScale(view: View) {
         startActivity(Intent(this, ScaleActivity::class.java))
     }
 }
