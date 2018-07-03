@@ -52,6 +52,14 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    fun buttonClickBasket(view: View) {
+        if(isConnected()) {
+            startActivity(Intent(this, BasketActivity::class.java))
+        } else {
+            Toast.makeText(applicationContext, R.string.error_no_network, Toast.LENGTH_SHORT).show()
+        }
+    }
+
     fun createNotification(view: View) {
 
         notificationId++
