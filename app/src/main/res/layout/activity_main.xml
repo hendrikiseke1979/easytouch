@@ -43,6 +43,6 @@
         android:text="@string/notification_btn_create"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button" />
+        app:layout_constraintTop_toBottomOf="@+id/buttonBasket" />
 
 </android.support.constraint.ConstraintLayout>
