@@ -8,7 +8,7 @@ import org.json.JSONObject
 import java.net.URL
 
 class ScaleActivity : AppCompatActivity() {
-    fun getValueFromJson(url: String): String {
+    private fun getValueFromJson(url: String): String {
         val jsonObject = JSONObject(URL(url).readText());
         val dataObject = (jsonObject.get("data") as JSONArray).get(0);
 
