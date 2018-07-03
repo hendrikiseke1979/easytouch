@@ -16,8 +16,17 @@ import com.joanzapata.iconify.Iconify
 import com.joanzapata.iconify.fonts.FontAwesomeModule
 import java.text.DateFormat
 import java.util.*
+import android.media.RingtoneManager
+import android.app.NotificationChannel
+import android.graphics.Color
+import android.os.Build
+import android.support.v4.app.NotificationCompat
+
 
 class MainActivity : AppCompatActivity() {
+    private var notificationId = 0;
+    private val NOTIFICATION_CHANNEL_ID = "notification_channel"
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -36,7 +45,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun buttonClickScale(view: View) {
-        if(isConnected()) {
+        if (isConnected()) {
             startActivity(Intent(this, ScaleActivity::class.java))
         } else {
             Toast.makeText(applicationContext, R.string.error_no_network, Toast.LENGTH_SHORT).show()
@@ -45,25 +54,31 @@ class MainActivity : AppCompatActivity() {
 
     fun createNotification(view: View) {
 
+        notificationId++
 
-        // Prepare intent which is triggered if the
-        // notification is selected
         val intent = Intent(this, NotificationReceiverActivity::class.java)
         val pIntent = PendingIntent.getActivity(this, System.currentTimeMillis().toInt(), intent, 0)
 
-        // Build notification
-        // Actions are just fake
-        val notification = Notification.Builder(this)
-                .setContentTitle("Awesome notification " + DateFormat.getDateInstance().format(Date()))
-                .setContentText("Awesome notification triggered by you ").setSmallIcon(R.mipmap.ic_launcher)
-                .setContentIntent(pIntent)
-                .addAction(R.mipmap.ic_launcher, "More", pIntent)
-                .build()
         val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val notificationChannel = NotificationChannel(NOTIFICATION_CHANNEL_ID, "Easytouch Notifications", NotificationManager.IMPORTANCE_DEFAULT)
 
-        // hide the notification after its selected
-        notification.flags = notification.flags or Notification.FLAG_AUTO_CANCEL
+            // Configure the notification channel.
+            notificationChannel.description = "Channel description"
+            notificationChannel.enableLights(true)
+            notificationChannel.lightColor = Color.RED
+            notificationChannel.enableVibration(true)
+            notificationManager.createNotificationChannel(notificationChannel)
+        }
 
-        notificationManager.notify(0, notification)
+        val builder = NotificationCompat.Builder(this, NOTIFICATION_CHANNEL_ID)
+                .setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION))
+                .setSmallIcon(R.mipmap.ic_brain)
+                .setContentTitle("Awesome notification " + DateFormat.getDateInstance().format(Date()))
+                .setContentText("Awesome notification #$notificationId triggered by you")
+                .setContentIntent(pIntent)
+                .build()
+
+        notificationManager.notify(notificationId, builder)
     }
 }
