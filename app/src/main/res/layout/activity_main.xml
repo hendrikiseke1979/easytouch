@@ -2,12 +2,13 @@
 <android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     >
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/buttonScale"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_marginLeft="16dp"
@@ -19,6 +20,19 @@
         android:textColor="#fff"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/buttonBasket"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
+        android:background="@mipmap/button_scale"
+        android:onClick="buttonClickBasket"
+        android:paddingTop="20dp"
+        android:textColor="#fff"
+        app:layout_constraintBaseline_toBaselineOf="@+id/buttonScale"
+        app:layout_constraintStart_toEndOf="@+id/buttonScale" />
 
     <com.joanzapata.iconify.widget.IconButton
         android:id="@+id/button1"
