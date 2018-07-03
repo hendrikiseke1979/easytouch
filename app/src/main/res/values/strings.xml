@@ -3,4 +3,5 @@
     <string name="basket_weight">Leichtester|Schwerster Warenkorb</string>
     <string name="notification_btn_create">Create Notification</string>
     <string name="notification_txt_result">This is the result activity opened from the notification</string>
+    <string name="error_no_network">Keine Internet-Verbindung</string>
 </resources>
