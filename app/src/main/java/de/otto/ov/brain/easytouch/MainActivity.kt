@@ -12,6 +12,8 @@ import android.os.StrictMode
 import android.app.Activity
 import android.net.ConnectivityManager
 import android.widget.Toast
+import com.joanzapata.iconify.Iconify
+import com.joanzapata.iconify.fonts.FontAwesomeModule
 import java.text.DateFormat
 import java.util.*
 
@@ -22,7 +24,7 @@ class MainActivity : AppCompatActivity() {
         val policy = StrictMode.ThreadPolicy.Builder().permitAll().build()
         StrictMode.setThreadPolicy(policy)
 
-        //Iconify.with(FontAwesomeModule())
+        Iconify.with(FontAwesomeModule())
 
         setContentView(R.layout.activity_main)
     }
