@@ -36,7 +36,10 @@ abstract class AbstractActivity : AppCompatActivity() {
 
         // onPostExecute displays the results of the AsyncTask.
         override fun onPostExecute(result: String) {
-            spinner.visibility = View.INVISIBLE
+            tasks.remove(this)
+            if(tasks.size == 0) {
+                spinner.visibility = View.INVISIBLE
+            }
             findViewById<TextView>(id).apply {
                 text = applicationContext.getString(label, getValueFromJson(result))
             }
