@@ -6,10 +6,6 @@ import android.widget.TextView
 import org.json.JSONArray
 import org.json.JSONObject
 import java.net.URL
-import android.widget.Toast
-import android.os.AsyncTask
-import android.util.Log
-
 
 class ScaleActivity : AppCompatActivity() {
     private fun getValueFromJson(url: String): String {
