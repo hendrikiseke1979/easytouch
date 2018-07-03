@@ -13,7 +13,7 @@ class BasketActivity : AbstractActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_scale)
+        setContentView(R.layout.activity_basket)
 
         try {
             taskHeavier = HttpAsyncTask(R.id.heaviest, "http://tavira-net.servebeer.com/storage/E2C_20.json")
