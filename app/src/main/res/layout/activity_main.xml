@@ -27,7 +27,7 @@
         android:layout_height="100dp"
         android:layout_marginLeft="8dp"
         android:layout_marginStart="8dp"
-        android:background="@mipmap/button_scale"
+        android:background="@mipmap/button_basket"
         android:onClick="buttonClickBasket"
         android:paddingTop="20dp"
         android:textColor="#fff"
