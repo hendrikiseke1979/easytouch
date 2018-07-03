@@ -9,7 +9,6 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.os.StrictMode
-import android.support.v4.app.RemoteInput
 import java.text.DateFormat
 import java.util.*
 
