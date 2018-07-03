@@ -14,8 +14,8 @@ class ScaleActivity : AppCompatActivity() {
     private lateinit var taskHeavier: HttpAsyncTask
 
     private fun getValueFromJson(json: String): String {
-        val jsonObject = JSONObject(json);
-        val dataObject = (jsonObject.get("data") as JSONArray).get(0);
+        val jsonObject = JSONObject(json)
+        val dataObject = (jsonObject.get("data") as JSONArray).get(0)
 
         return (dataObject as JSONObject).get("Gewicht_kg").toString()
     }
@@ -50,7 +50,7 @@ class ScaleActivity : AppCompatActivity() {
         // onPostExecute displays the results of the AsyncTask.
         override fun onPostExecute(result: String) {
             findViewById<TextView>(id).apply {
-                text = getApplicationContext().getString(R.string.basket_weight_label, getValueFromJson(result))
+                text = applicationContext.getString(R.string.basket_weight_label, getValueFromJson(result))
             }
         }
     }
