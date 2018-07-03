@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">easytouch</string>
     <string name="basket_weight">Leichtester|Schwerster Warenkorb</string>
+    <string name="error_no_network">Keine Internet-Verbindung</string>
 </resources>

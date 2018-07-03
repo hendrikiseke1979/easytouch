@@ -5,6 +5,10 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.os.StrictMode
+import android.app.Activity
+import android.net.ConnectivityManager
+import android.widget.Toast
+
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -16,7 +20,17 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
     }
 
+    fun isConnected(): Boolean {
+        val connMgr = getSystemService(Activity.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val networkInfo = connMgr.activeNetworkInfo
+        return networkInfo != null && networkInfo.isConnected
+    }
+
     fun buttonClickScale(view: View) {
-        startActivity(Intent(this, ScaleActivity::class.java))
+        if(isConnected()) {
+            startActivity(Intent(this, ScaleActivity::class.java))
+        } else {
+            Toast.makeText(applicationContext, R.string.error_no_network, Toast.LENGTH_SHORT).show()
+        }
     }
 }
