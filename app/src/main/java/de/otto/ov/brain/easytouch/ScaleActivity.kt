@@ -8,6 +8,9 @@ import org.json.JSONObject
 import java.net.URL
 import android.widget.Toast
 import android.os.AsyncTask
+import android.view.View
+import android.widget.ProgressBar
+
 
 class ScaleActivity : AppCompatActivity() {
     private lateinit var taskLighter: HttpAsyncTask
@@ -43,12 +46,15 @@ class ScaleActivity : AppCompatActivity() {
     }
 
     private inner class HttpAsyncTask(val id: Int, val url: String) : AsyncTask<String, Void, String>() {
+        private var spinner: ProgressBar = findViewById(R.id.progressBar);
+
         override fun doInBackground(vararg url: String): String {
             return URL(this.url).readText()
         }
 
         // onPostExecute displays the results of the AsyncTask.
         override fun onPostExecute(result: String) {
+            spinner.visibility = View.INVISIBLE;
             findViewById<TextView>(id).apply {
                 text = applicationContext.getString(R.string.basket_weight_label, getValueFromJson(result))
             }
