@@ -12,6 +12,8 @@ import android.os.StrictMode
 import android.app.Activity
 import android.net.ConnectivityManager
 import android.widget.Toast
+import com.joanzapata.iconify.Iconify
+import com.joanzapata.iconify.fonts.FontAwesomeModule
 import java.text.DateFormat
 import java.util.*
 
@@ -22,10 +24,12 @@ class MainActivity : AppCompatActivity() {
         val policy = StrictMode.ThreadPolicy.Builder().permitAll().build()
         StrictMode.setThreadPolicy(policy)
 
+        Iconify.with(FontAwesomeModule())
+
         setContentView(R.layout.activity_main)
     }
 
-    fun isConnected(): Boolean {
+    private fun isConnected(): Boolean {
         val connMgr = getSystemService(Activity.CONNECTIVITY_SERVICE) as ConnectivityManager
         val networkInfo = connMgr.activeNetworkInfo
         return networkInfo != null && networkInfo.isConnected
