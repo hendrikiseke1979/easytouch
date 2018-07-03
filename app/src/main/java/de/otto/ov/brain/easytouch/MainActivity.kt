@@ -1,26 +1,25 @@
 package de.otto.ov.brain.easytouch
 
-import android.app.Notification
+import android.app.Activity
+import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
-import android.support.v7.app.AppCompatActivity
-import android.os.Bundle
-import android.view.View
-import android.os.StrictMode
-import android.app.Activity
+import android.graphics.Color
+import android.media.RingtoneManager
 import android.net.ConnectivityManager
+import android.os.Build
+import android.os.Bundle
+import android.os.StrictMode
+import android.support.v4.app.NotificationCompat
+import android.support.v7.app.AppCompatActivity
+import android.view.View
 import android.widget.Toast
 import com.joanzapata.iconify.Iconify
 import com.joanzapata.iconify.fonts.FontAwesomeModule
 import java.text.DateFormat
 import java.util.*
-import android.media.RingtoneManager
-import android.app.NotificationChannel
-import android.graphics.Color
-import android.os.Build
-import android.support.v4.app.NotificationCompat
 
 
 class MainActivity : AppCompatActivity() {
@@ -53,7 +52,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun buttonClickBasket(view: View) {
-        if(isConnected()) {
+        if (isConnected()) {
             startActivity(Intent(this, BasketActivity::class.java))
         } else {
             Toast.makeText(applicationContext, R.string.error_no_network, Toast.LENGTH_SHORT).show()
