@@ -50,7 +50,7 @@ class ScaleActivity : AppCompatActivity() {
         // onPostExecute displays the results of the AsyncTask.
         override fun onPostExecute(result: String) {
             findViewById<TextView>(id).apply {
-                text = getValueFromJson(result)
+                text = getApplicationContext().getString(R.string.basket_weight_label, getValueFromJson(result))
             }
         }
     }
