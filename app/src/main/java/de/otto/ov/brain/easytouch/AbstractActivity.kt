@@ -12,10 +12,10 @@ import org.json.JSONObject
 import java.net.URL
 
 abstract class AbstractActivity : AppCompatActivity() {
-    abstract protected val contentView: Int
-    abstract protected val jsonKey: String
-    abstract protected val label: Int
-    abstract protected var taskDefinitions: HashMap<Int, String>
+    protected abstract val contentView: Int
+    protected abstract val jsonKey: String
+    protected abstract val label: Int
+    protected abstract var taskDefinitions: HashMap<Int, String>
 
 
     private var tasks = ArrayList<HttpAsyncTask>()
