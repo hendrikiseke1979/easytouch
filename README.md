@@ -6,7 +6,7 @@ Android project to play around with android studio and android app development
 
 * https://github.com/JoanZapata/android-iconify
 * https://www.htc.com/de/support/htc-u11/faq/applikationen/enable-developer-options.html
-* https://androidkennel.org/android-camera-access-tutorial/
+* https://github.com/mobapptuts/kotlin-camera-intent
 
 ## tried
 
@@ -18,6 +18,9 @@ Android project to play around with android studio and android app development
 * include fontawesome icons
 * trigger notification
 * disable feature by device specification
+* run the camera app
+* save camera picture to phone
+* try different ways to assign click event handler to element
 
 ## to try
 

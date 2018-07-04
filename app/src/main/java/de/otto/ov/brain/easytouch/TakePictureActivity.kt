@@ -1,36 +1,93 @@
 package de.otto.ov.brain.easytouch
 
-import android.hardware.Camera
-import android.os.Bundle
+import android.app.Activity
+import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.support.v7.app.AppCompatActivity
-import android.util.Log
-import android.widget.FrameLayout
-import android.widget.ImageButton
+import android.os.Bundle
+import android.os.Environment
+import android.provider.MediaStore
+import android.support.v4.content.FileProvider
+import android.widget.Toast
+
+import kotlinx.android.synthetic.main.activity_take_picture.*
+import java.io.File
+import java.io.IOException
+import java.text.SimpleDateFormat
+import java.util.*
 
 class TakePictureActivity : AppCompatActivity() {
 
-    private var mCamera: Camera? = null
-    private var mCameraView: CameraView? = null
+    val CAMERA_REQUEST_CODE = 0
+    lateinit var imageFilePath: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_take_picture)
-        try {
-            mCamera = Camera.open()//you can use open(int) to use different cameras
-        } catch (e: Exception) {
-            Log.d("ERROR", "Failed to get camera: " + e.message)
+
+        // cameraButton is imported by
+        // import kotlinx.android.synthetic.main.activity_take_picture.*
+        // same as onClick event in layout
+        cameraButton.setOnClickListener {
+            try {
+                val imageFile = createImageFile()
+                val callCameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+                if(callCameraIntent.resolveActivity(packageManager) != null) {
+                    val authorities = "$packageName.fileprovider"
+                    val imageUri = FileProvider.getUriForFile(this, authorities, imageFile)
+                    callCameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri)
+                    startActivityForResult(callCameraIntent, CAMERA_REQUEST_CODE)
+                }
+            } catch (e: IOException) {
+                Toast.makeText(this, "Could not create file!", Toast.LENGTH_SHORT).show()
+            }
         }
+    }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
 
-        if (mCamera != null) {
-            mCameraView = CameraView(this, mCamera)//create a SurfaceView to show camera data
-            val cameraView = findViewById<FrameLayout>(R.id.camera_view)
-            cameraView.addView(mCameraView)//add the SurfaceView to the layout
+        when(requestCode) {
+            CAMERA_REQUEST_CODE -> {
+                if (resultCode == Activity.RESULT_OK) {
+                    photoImageView.setImageBitmap(setScaledBitmap())
+                }
+            }
+            else -> {
+                Toast.makeText(this, "Unrecognized request code", Toast.LENGTH_SHORT).show()
+            }
         }
+    }
 
-        //btn to close the application
-        val imgClose = findViewById<ImageButton>(R.id.imgClose)
-        imgClose.setOnClickListener { System.exit(0) }
+    @Throws(IOException::class)
+    private fun createImageFile(): File {
+        val timeStamp: String = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
+        val imageFileName: String = "JPEG_" + timeStamp + "_"
+        val storageDir: File = getExternalFilesDir(Environment.DIRECTORY_PICTURES)
+        if(!storageDir.exists()) storageDir.mkdirs()
+        val imageFile = File.createTempFile(imageFileName, ".jpg", storageDir)
+        imageFilePath = imageFile.absolutePath
+        return imageFile
+    }
+
+    private fun setScaledBitmap(): Bitmap {
+        val imageViewWidth = photoImageView.width
+        val imageViewHeight = photoImageView.height
+
+        val bmOptions = BitmapFactory.Options()
+        bmOptions.inJustDecodeBounds = true
+        BitmapFactory.decodeFile(imageFilePath, bmOptions)
+        val bitmapWidth = bmOptions.outWidth
+        val bitmapHeight = bmOptions.outHeight
+
+        val scaleFactor = Math.min(bitmapWidth/imageViewWidth, bitmapHeight/imageViewHeight)
+
+        bmOptions.inJustDecodeBounds = false
+        bmOptions.inSampleSize = scaleFactor
+
+        return BitmapFactory.decodeFile(imageFilePath, bmOptions)
+
     }
 
 }
