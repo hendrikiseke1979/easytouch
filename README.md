@@ -16,3 +16,8 @@ Android project to play around with android studio and android app development
 * load data from web
 * include fontawesome icons
 * trigger notification
+* disable feature by device specification
+
+## to try
+
+* write tests
