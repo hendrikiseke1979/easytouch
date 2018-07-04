@@ -2,9 +2,10 @@
     <string name="app_name">easytouch</string>
     <string name="basket_weight">Leichtester|Schwerster Warenkorb</string>
     <string name="notification_btn_create">{fa-bell} Create Notification</string>
-    <string name="picture_btn_take">{fa-camera} Take picture</string>
+    <string name="picture_btn_picture">{fa-camera} Picture feature</string>
     <string name="notification_txt_result">This is the result activity opened from the notification</string>
     <string name="error_no_network">Keine Internet-Verbindung</string>
     <string name="basket_weight_label">%1$s kg</string>
     <string name="basket_size_label">%1$s €</string>
+    <string name="camera_btn_take_a_picture">{fa-camera} Take a picture!</string>
 </resources>

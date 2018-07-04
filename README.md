@@ -6,6 +6,7 @@ Android project to play around with android studio and android app development
 
 * https://github.com/JoanZapata/android-iconify
 * https://www.htc.com/de/support/htc-u11/faq/applikationen/enable-developer-options.html
+* https://androidkennel.org/android-camera-access-tutorial/
 
 ## tried
 

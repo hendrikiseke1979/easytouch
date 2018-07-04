@@ -20,10 +20,8 @@ import com.joanzapata.iconify.Iconify
 import com.joanzapata.iconify.fonts.FontAwesomeModule
 import java.text.DateFormat
 import java.util.*
-import android.R.attr.button
 import android.content.pm.PackageManager
 import com.joanzapata.iconify.widget.IconButton
-
 
 class MainActivity : AppCompatActivity() {
     private var notificationId = 0;
@@ -74,6 +72,9 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * triggers a notification which opens a notification activity
+     */
     fun buttonClickNotification(view: View) {
 
         notificationId++
@@ -104,7 +105,10 @@ class MainActivity : AppCompatActivity() {
         notificationManager.notify(notificationId, builder)
     }
 
-    fun buttonClickTakePicture(view: View) {
-
+    /**
+     * triggers the camera activity
+     */
+    fun buttonClickPicture(view: View) {
+        startActivity(Intent(this, TakePictureActivity::class.java))
     }
 }
