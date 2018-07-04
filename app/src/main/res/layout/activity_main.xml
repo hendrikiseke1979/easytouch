@@ -32,14 +32,25 @@
         app:layout_constraintStart_toEndOf="@+id/buttonScale" />
 
     <com.joanzapata.iconify.widget.IconButton
-        android:id="@+id/button1"
+        android:id="@+id/buttonNotification"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:onClick="createNotification"
+        android:onClick="buttonClickNotification"
         android:text="@string/notification_btn_create"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonBasket" />
+
+    <com.joanzapata.iconify.widget.IconButton
+        android:id="@+id/buttonPicture"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:onClick="buttonClickTakePicture"
+        android:text="@string/picture_btn_take"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonNotification" />
 
 </android.support.constraint.ConstraintLayout>

@@ -20,6 +20,9 @@ import com.joanzapata.iconify.Iconify
 import com.joanzapata.iconify.fonts.FontAwesomeModule
 import java.text.DateFormat
 import java.util.*
+import android.R.attr.button
+import android.content.pm.PackageManager
+import com.joanzapata.iconify.widget.IconButton
 
 
 class MainActivity : AppCompatActivity() {
@@ -34,7 +37,19 @@ class MainActivity : AppCompatActivity() {
 
         Iconify.with(FontAwesomeModule())
 
+        disablePicture()
+
         setContentView(R.layout.activity_main)
+    }
+
+    /**
+     * disables the camera button if no camera is available
+     */
+    private fun disablePicture() {
+        if(!packageManager.hasSystemFeature(PackageManager.FEATURE_CAMERA)) {
+            val button: IconButton = findViewById(R.id.buttonPicture)
+            button.visibility = View.GONE
+        }
     }
 
     private fun isConnected(): Boolean {
@@ -59,7 +74,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun createNotification(view: View) {
+    fun buttonClickNotification(view: View) {
 
         notificationId++
 
@@ -87,5 +102,9 @@ class MainActivity : AppCompatActivity() {
                 .build()
 
         notificationManager.notify(notificationId, builder)
+    }
+
+    fun buttonClickTakePicture(view: View) {
+
     }
 }
