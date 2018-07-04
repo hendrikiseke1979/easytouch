@@ -21,11 +21,15 @@ import com.joanzapata.iconify.fonts.FontAwesomeModule
 import java.text.DateFormat
 import java.util.*
 import android.content.pm.PackageManager
+import android.hardware.Camera
 import com.joanzapata.iconify.widget.IconButton
 
 class MainActivity : AppCompatActivity() {
     private var notificationId = 0;
     private val NOTIFICATION_CHANNEL_ID = "notification_channel"
+
+    private var mCamera: Camera? = null
+    private var mCameraView: CameraView? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

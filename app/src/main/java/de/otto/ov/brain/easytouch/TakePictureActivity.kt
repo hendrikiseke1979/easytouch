@@ -1,48 +1,36 @@
 package de.otto.ov.brain.easytouch
 
-import android.Manifest
-import android.support.v7.app.AppCompatActivity
+import android.hardware.Camera
 import android.os.Bundle
-import android.view.View
-import android.widget.Button
-import android.widget.ImageView
-import android.app.Activity
-import android.content.Intent
-import android.support.v4.app.ActivityCompat
-import android.content.pm.PackageManager
-import android.net.Uri
-import android.os.Environment
-import android.provider.MediaStore
-import android.support.v4.content.ContextCompat
+import android.support.v7.app.AppCompatActivity
 import android.util.Log
-import java.io.File
-import java.text.SimpleDateFormat
-import java.util.*
+import android.widget.FrameLayout
+import android.widget.ImageButton
 
 class TakePictureActivity : AppCompatActivity() {
 
-    private var takePictureButton: Button? = null
-    private var imageView: ImageView? = null
-    private var file: Uri? = null
+    private var mCamera: Camera? = null
+    private var mCameraView: CameraView? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_take_picture)
-
-        checkPermissions()
-    }
-
-    /**
-     * disable picture button if permissions are not granted
-     */
-    private fun checkPermissions() {
-        takePictureButton = this.findViewById(R.id.button_take_image)
-        imageView = findViewById<View>(R.id.imageview) as ImageView
-
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-            takePictureButton!!.isEnabled = false
-            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE), 0)
+        try {
+            mCamera = Camera.open()//you can use open(int) to use different cameras
+        } catch (e: Exception) {
+            Log.d("ERROR", "Failed to get camera: " + e.message)
         }
+
+
+        if (mCamera != null) {
+            mCameraView = CameraView(this, mCamera)//create a SurfaceView to show camera data
+            val cameraView = findViewById<FrameLayout>(R.id.camera_view)
+            cameraView.addView(mCameraView)//add the SurfaceView to the layout
+        }
+
+        //btn to close the application
+        val imgClose = findViewById<ImageButton>(R.id.imgClose)
+        imgClose.setOnClickListener { System.exit(0) }
     }
 
 }
